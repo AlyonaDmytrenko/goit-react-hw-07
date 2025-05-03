@@ -3,13 +3,18 @@ import Contact from './Contact/Contact';
 
 const ContactList = () => {
   const userContact = useSelector(state => state.contacts.items);
-  const filter = useSelector(state => state.filters.name);
+  const filter = useSelector(state => state.filters.name) || '';
 
-  const filteredContact = userContact.filter(
-    contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase()) ||
-      contact.number.toLowerCase().includes(filter.toLowerCase())
-  );
+  if (!userContact) {
+    return <p>Loading...</p>;
+  }
+
+  const filteredContact = userContact.filter(contact => {
+    const name = contact.name?.toLowerCase() || '';
+    const number = contact.number?.toLowerCase() || '';
+    const search = filter.toLowerCase();
+    return name.includes(search) || number.includes(search);
+  });
 
   return (
     <ul>
