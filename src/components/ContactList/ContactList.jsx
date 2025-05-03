@@ -4,6 +4,7 @@ import Contact from './Contact/Contact';
 const ContactList = () => {
   const userContact = useSelector(state => state.contacts.items);
   const filter = useSelector(state => state.filters.name) || '';
+  // const error = useSelector(state => state.error.contactList.error);
 
   if (!userContact) {
     return <p>Loading...</p>;
@@ -28,6 +29,7 @@ const ContactList = () => {
         </li>
       ))}
     </ul>
+    // {error && <h2>server is dead</h2>}
   );
 };
 

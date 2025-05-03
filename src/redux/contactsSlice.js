@@ -23,9 +23,14 @@ const contactsSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(fetchDataThunk.fulfilled, (state, action) => {
-      state.items = action.payload;
-    });
+    builder
+      .addCase(fetchDataThunk.fulfilled, (state, action) => {
+        state.items = action.payload;
+      })
+      .addCase(fetchDataThunk.rejected),
+      (state, action) => {
+        state.error = action.payload;
+      };
   },
 });
 
