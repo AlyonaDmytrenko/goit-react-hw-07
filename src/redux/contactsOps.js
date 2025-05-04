@@ -31,3 +31,27 @@ export const deleteContactThunk = createAsyncThunk(
     }
   }
 );
+
+export const addContactThunk = createAsyncThunk(
+  'addContact',
+  async (body, thunkAPI) => {
+    try {
+      const response = await axios.post(`/contacts`, body);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const editContact = createAsyncThunk(
+  'editContact',
+  async (body, thunkAPI) => {
+    try {
+      const response = await axios.put(`/contacts/${body.id}`, body);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

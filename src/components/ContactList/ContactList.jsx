@@ -1,10 +1,18 @@
 import { useSelector } from 'react-redux';
 import Contact from './Contact/Contact';
+import {
+  selectContacts,
+  selectFilter,
+  selectLoading,
+  selectError,
+} from '../../redux/selectors';
+import NameFilter from '../Filter/NameFilter';
 
 const ContactList = () => {
-  const userContact = useSelector(state => state.contacts.items);
-  const filter = useSelector(state => state.filters.name) || '';
-  // const error = useSelector(state => state.error.contactList.error);
+  const userContact = useSelector(selectContacts);
+  const filter = useSelector(selectFilter) || '';
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
 
   if (!userContact) {
     return <p>Loading...</p>;
@@ -18,18 +26,22 @@ const ContactList = () => {
   });
 
   return (
-    <ul>
-      {filteredContact.map(contact => (
-        <li key={contact.id}>
-          <Contact
-            id={contact.id}
-            name={contact.name}
-            number={contact.number}
-          />
-        </li>
-      ))}
-    </ul>
-    // {error && <h2>server is dead</h2>}
+    <div>
+      <NameFilter />
+      <ul>
+        {filteredContact.map(contact => (
+          <li key={contact.id}>
+            <Contact
+              id={contact.id}
+              name={contact.name}
+              number={contact.number}
+            />
+          </li>
+        ))}
+      </ul>
+      {loading && <h2>Loading...</h2>}
+      {error && <h2>Server is dead</h2>}
+    </div>
   );
 };
 

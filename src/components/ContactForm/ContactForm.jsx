@@ -2,13 +2,14 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid';
 import * as Yup from 'yup';
-import { addContact } from '../../redux/contactsSlice';
+// import { addContact } from '../../redux/contactsSlice';
 import {
   FORM_INITIAL_VALUES,
   MAX_CHAR_NAME_VALIDATION,
   MIN_CHAR_NAME_VALIDATION,
 } from '../../utils/constants';
 import css from './contactForm.module.css';
+import { addContactThunk } from '../../redux/contactsOps';
 
 const contactSchema = Yup.object({
   name: Yup.string()
@@ -32,7 +33,7 @@ const ContactForm = () => {
       ...values,
       id: nanoid(),
     };
-    dispatch(addContact(finalContact));
+    dispatch(addContactThunk(finalContact));
     actions.resetForm();
   };
 
