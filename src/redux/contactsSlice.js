@@ -17,22 +17,15 @@ const contactsSlice = createSlice({
 
   initialState: INITIAL_STATE,
 
-  reducers: {
-    addContact(state, action) {
-      {
-        state.items.push(action.payload);
-      }
-    },
-    deleteContact(state, action) {
-      state.items = state.items.filter(item => item.id !== action.payload);
-    },
-  },
   extraReducers: builder => {
     builder
       .addCase(fetchDataThunk.fulfilled, (state, action) => {
         state.items = action.payload;
       })
       .addCase(fetchDataThunk.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(fetchDataThunk.pending, (state, action) => {
         state.error = action.payload;
       })
       .addCase(deleteContactThunk.fulfilled, (state, action) => {
@@ -48,7 +41,5 @@ const contactsSlice = createSlice({
       });
   },
 });
-
-export const { addContact, deleteContact } = contactsSlice.actions;
 
 export const contactsReducer = contactsSlice.reducer;

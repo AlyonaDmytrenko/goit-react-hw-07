@@ -7,6 +7,4 @@ export const store = configureStore({
     contacts: contactsReducer,
     filters: filtersReducer,
   },
-
-  devTools: process.env.NODE_ENV === 'development',
 });

@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import ContactForm from './components/ContactForm/ContactForm';
 import ContactList from './components/ContactList/ContactList';
-import SearchBox from './components/SearchBox/SearchBox';
+// import SearchBox from './components/SearchBox/SearchBox';
 import { useEffect } from 'react';
 import { fetchDataThunk } from './redux/contactsOps';
 
@@ -14,7 +14,7 @@ function App() {
     <div>
       <h1>Phonebook</h1>
       <ContactForm />
-      <SearchBox />
+      {/* <SearchBox /> */}
       <ContactList />
     </div>
   );

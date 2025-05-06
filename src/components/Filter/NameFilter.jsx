@@ -9,7 +9,17 @@ const NameFilter = () => {
     dispatch(changeFilter(e.target.value));
   };
 
-  return <h2></h2>;
+  return (
+    <div>
+      <p>Find contacts by name</p>
+      <input
+        type="text"
+        placeholder="Search..."
+        value={filter}
+        onChange={handleChange}
+      />
+    </div>
+  );
 };
 
 export default NameFilter;
